@@ -272,18 +272,31 @@ test("resume PDF is available and download needs confirmation", async ({
 
   let downloads = 0;
   page.on("download", () => downloads++);
-  page.once("dialog", async (dialog) => {
-    expect(dialog.message()).toBe("Deseja baixar o currículo em PDF?");
-    await dialog.dismiss();
-  });
   await downloadLink.click();
+  const confirmation = page.getByRole("dialog", { name: "Baixar currículo?" });
+  await expect(confirmation).toBeVisible();
+  await expect(
+    confirmation.getByRole("button", { name: "Cancelar" }),
+  ).toBeFocused();
+  await confirmation.getByRole("button", { name: "Cancelar" }).click();
+  await expect(confirmation).not.toBeVisible();
+  await expect(downloadLink).toBeFocused();
+  expect(downloads).toBe(0);
+  await downloadLink.press("Enter");
+  await expect(confirmation).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(confirmation).not.toBeVisible();
+  await expect(downloadLink).toBeFocused();
   expect(downloads).toBe(0);
 
-  page.once("dialog", async (dialog) => await dialog.accept());
+  await downloadLink.click();
   const [download] = await Promise.all([
     page.waitForEvent("download"),
-    downloadLink.click(),
+    confirmation
+      .getByRole("link", { name: "Baixar currículo", exact: true })
+      .click(),
   ]);
+  await expect(confirmation).not.toBeVisible();
   expect(download.suggestedFilename()).toBe(profile.resume.filename);
 });
 
@@ -381,4 +394,46 @@ test("project previews cycle through photos and keep resource links usable on sm
     }
   }
   expect(errors).toEqual([]);
+});
+
+test("resume confirmation fits both themes and mobile screens", async ({
+  page,
+}, testInfo) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  for (const width of [320, 390, 1280]) {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto("/#curriculo");
+    for (const theme of ["dark", "light"]) {
+      await page.evaluate(
+        (value) => (document.documentElement.dataset.theme = value),
+        theme,
+      );
+      await page.getByRole("link", { name: "Baixar PDF", exact: true }).click();
+      const dialog = page.getByRole("dialog", { name: "Baixar currículo?" });
+      await expect(dialog).toBeVisible();
+      const bounds = await dialog.boundingBox();
+      expect(bounds!.x).toBeGreaterThanOrEqual(0);
+      expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width);
+      expect(
+        await dialog.evaluate((el) => el.scrollWidth <= el.clientWidth),
+      ).toBe(true);
+      await expect(
+        dialog.getByRole("button", { name: "Cancelar" }),
+      ).toBeFocused();
+      await page.keyboard.press("Tab");
+      await expect(
+        dialog.getByRole("link", { name: "Baixar currículo", exact: true }),
+      ).toBeFocused();
+      await page.keyboard.press("Shift+Tab");
+      await page.keyboard.press("Shift+Tab");
+      await expect(
+        dialog.getByRole("button", { name: "Fechar confirmação" }),
+      ).toBeFocused();
+      await page.screenshot({
+        path: testInfo.outputPath(`resume-${width}-${theme}.png`),
+      });
+      await page.keyboard.press("Enter");
+      await expect(dialog).not.toBeVisible();
+    }
+  }
 });

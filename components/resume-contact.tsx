@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { contactChannels, profile } from "@/lib/portfolio";
 import { withBasePath } from "@/lib/site-path";
+import ResumeDownload from "./resume-download";
 
 const contactIcons = {
   linkedin: Link,
@@ -64,18 +65,10 @@ export default function ResumeContact() {
                 >
                   Abrir currículo <ArrowUpRight size={17} />
                 </a>
-                <a
-                  className="button secondary"
+                <ResumeDownload
                   href={withBasePath(profile.resume.url)}
-                  download={profile.resume.filename}
-                  onClick={(event) => {
-                    if (!window.confirm("Deseja baixar o currículo em PDF?")) {
-                      event.preventDefault();
-                    }
-                  }}
-                >
-                  <Download size={17} /> Baixar PDF
-                </a>
+                  filename={profile.resume.filename}
+                />
               </>
             ) : (
               <>
