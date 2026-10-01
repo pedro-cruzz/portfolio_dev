@@ -8,6 +8,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { contactChannels, profile } from "@/lib/portfolio";
+import { withBasePath } from "@/lib/site-path";
 
 const contactIcons = {
   linkedin: Link,
@@ -58,7 +59,7 @@ export default function ResumeContact() {
               <>
                 <a
                   className="button primary"
-                  href={profile.resume.url}
+                  href={withBasePath(profile.resume.url)}
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Abrir currículo em nova aba"
@@ -67,7 +68,7 @@ export default function ResumeContact() {
                 </a>
                 <a
                   className="button secondary"
-                  href={profile.resume.url}
+                  href={withBasePath(profile.resume.url)}
                   download={profile.resume.filename}
                 >
                   <Download size={17} /> Baixar PDF

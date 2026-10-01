@@ -11,6 +11,10 @@ npm run dev
 
 Prévia local: http://127.0.0.1:3000.
 
+## Publicação
+
+O site é exportado como arquivos estáticos e publicado pelo workflow em `.github/workflows/nextjs.yml` no [GitHub Pages](https://pedro-cruzz.github.io/portfolio_dev/). O workflow compila com `NEXT_PUBLIC_BASE_PATH=/portfolio_dev`, envia `out/` e publica a cada push na branch `main`. Para desenvolver localmente, use `npm run dev` sem esse prefixo.
+
 ## Stack
 
 - Next.js 16, React 19 e TypeScript.
@@ -92,7 +96,7 @@ npm run build
 npm test
 ```
 
-O build exporta HTML e assets para `out/`. O código-fonte está no GitHub; o site ainda não foi publicado.
+O build exporta HTML e assets para `out/`. A versão pública é atualizada pelo workflow do GitHub Pages.
 
 ## Direção visual
 

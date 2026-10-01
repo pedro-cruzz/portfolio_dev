@@ -8,6 +8,7 @@ import {
   type HeadsetTrack,
 } from "@/lib/ambient-audio";
 import type { SceneItem } from "@/lib/portfolio";
+import { withBasePath } from "@/lib/site-path";
 
 const defaultMessage = "Clique, toque ou use Tab e Enter nos objetos.";
 
@@ -112,7 +113,7 @@ export default function useWorkbenchInteractions(reducedMotion: boolean) {
       if (mediaSource.current !== src) {
         audio.pause();
         mediaSource.current = src;
-        audio.src = src;
+        audio.src = withBasePath(src);
         audio.load();
       }
       if (Number.isFinite(audio.duration)) setDuration(audio.duration);

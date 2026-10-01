@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Maximize2, X } from "lucide-react";
 import type { Project } from "@/lib/portfolio";
+import { withBasePath } from "@/lib/site-path";
 export default function ProjectGallery({
   project,
   compact = false,
@@ -49,7 +50,12 @@ export default function ProjectGallery({
           onClick={() => setOpen(true)}
           aria-label={`Ampliar imagem de ${project.name}`}
         >
-          <img src={image.src} alt={image.alt} width={1440} height={960} />
+          <img
+            src={withBasePath(image.src)}
+            alt={image.alt}
+            width={1440}
+            height={960}
+          />
           <span className="gallery-expand">
             <Maximize2 size={15} />
             Ampliar
@@ -71,7 +77,7 @@ export default function ProjectGallery({
               aria-pressed={index === i}
               aria-label={`Ver imagem ${i + 1} de ${project.name}`}
             >
-              <img src={img.src} alt="" width={96} height={64} />
+              <img src={withBasePath(img.src)} alt="" width={96} height={64} />
               <span>0{i + 1}</span>
             </button>
           ))}
@@ -136,7 +142,12 @@ export default function ProjectGallery({
             <X size={20} />
           </button>
         </div>
-        <img src={image.src} alt={image.alt} width={1440} height={960} />
+        <img
+          src={withBasePath(image.src)}
+          alt={image.alt}
+          width={1440}
+          height={960}
+        />
         <div className="image-dialog-footer">
           <button
             onClick={() => move(-1)}

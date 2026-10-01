@@ -1,6 +1,7 @@
 /** @jsxImportSource react */
 import { ArrowUpRight } from "lucide-react";
 import type { ProjectExperience } from "@/lib/portfolio";
+import { withBasePath } from "@/lib/site-path";
 
 export default function ProjectExperienceDetails({
   experience,
@@ -12,7 +13,10 @@ export default function ProjectExperienceDetails({
     experience.responsibilities?.filter((item) => item.trim()) ?? [];
   const facts = [
     ["Período", experience.period],
-    ["Colaboração", experience.collaborator ? undefined : experience.collaboration],
+    [
+      "Colaboração",
+      experience.collaborator ? undefined : experience.collaboration,
+    ],
     ["Natureza", experience.nature],
     ["Situação", experience.status],
     ["Registro", experience.registration],
@@ -29,7 +33,13 @@ export default function ProjectExperienceDetails({
     ["Resultado observado", experience.outcome],
     ["Aprendizado", experience.learning],
   ].filter(([, value]) => value?.trim());
-  if (!facts.length && !notes.length && !responsibilities.length && !experience.collaborator) return null;
+  if (
+    !facts.length &&
+    !notes.length &&
+    !responsibilities.length &&
+    !experience.collaborator
+  )
+    return null;
 
   return (
     <section className="case-experience" aria-labelledby="experience-title">
@@ -37,7 +47,9 @@ export default function ProjectExperienceDetails({
         <span>//</span>PARTICIPAÇÃO & TRAJETÓRIA
       </p>
       <h2 id="experience-title">
-        {experience.collaborator ? "Autoria e participação no projeto." : "Minha experiência no projeto."}
+        {experience.collaborator
+          ? "Autoria e participação no projeto."
+          : "Minha experiência no projeto."}
       </h2>
       {experience.collaborator && (
         <a
@@ -63,7 +75,7 @@ export default function ProjectExperienceDetails({
                 {label === "Registro" && experience.registrationDocument && (
                   <a
                     className="case-certificate-link"
-                    href={experience.registrationDocument}
+                    href={withBasePath(experience.registrationDocument)}
                     target="_blank"
                     rel="noopener noreferrer"
                   >

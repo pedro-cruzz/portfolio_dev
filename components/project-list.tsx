@@ -26,6 +26,7 @@ import {
 } from "@/lib/project-explorer";
 import ProjectBlueprint from "./project-blueprint";
 import GitHubIcon from "./github-icon";
+import { withBasePath } from "@/lib/site-path";
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const [imageIndex, setImageIndex] = useState(0);
@@ -70,7 +71,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <>
               <img
                 key={photo.src}
-                src={photo.src}
+                src={withBasePath(photo.src)}
                 alt={photo.alt}
                 width={1440}
                 height={960}
@@ -182,7 +183,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 <strong>{project.experience.registrationNumber}</strong>
                 {project.experience.registrationDocument && (
                   <a
-                    href={project.experience.registrationDocument}
+                    href={withBasePath(project.experience.registrationDocument)}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Ver certificado do INPI de ${project.name}`}

@@ -6,6 +6,7 @@ import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
 import { rehypeDocumentHeadings } from "@/lib/document-headings";
 import type { ProjectDocument } from "@/lib/documentation";
+import { withBasePath } from "@/lib/site-path";
 
 type Props = {
   slug: string;
@@ -76,7 +77,9 @@ export default function DocumentMarkdown({ slug, document, documents }: Props) {
         (doc) => doc.filename.toLowerCase() === decodedPath.toLowerCase(),
       );
     if (local)
-      return `/projetos/${slug}/documentacao/${local.id}${fragment ? `#doc-${fragment}` : ""}`;
+      return withBasePath(
+        `/projetos/${slug}/documentacao/${local.id}${fragment ? `#doc-${fragment}` : ""}`,
+      );
     if (document.source) {
       const base =
         key === "src" ? document.source.rawUrl : document.source.htmlUrl;
@@ -87,7 +90,7 @@ export default function DocumentMarkdown({ slug, document, documents }: Props) {
         safe.startsWith("/") ? rootBase : base,
       ).href;
     }
-    return safe;
+    return withBasePath(safe);
   }
   return (
     <div className="doc-markdown">
