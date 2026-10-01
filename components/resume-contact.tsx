@@ -2,7 +2,6 @@ import {
   ArrowUpRight,
   Download,
   FileUser,
-  Camera,
   Link,
   Mail,
   MessageCircle,
@@ -14,7 +13,6 @@ const contactIcons = {
   linkedin: Link,
   whatsapp: MessageCircle,
   email: Mail,
-  instagram: Camera,
 };
 
 export default function ResumeContact() {

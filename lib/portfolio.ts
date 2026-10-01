@@ -8,7 +8,6 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/pedro-henrique-vilas-boas/",
   whatsapp: "5535998603656",
   email: "phcruzvilasboas@gmail.com",
-  instagram: "https://www.instagram.com/peedro.cruzz/",
   resume: {
     // Add the PDF under public/ and set its local URL when it is ready.
     url: "",
@@ -38,13 +37,6 @@ export const contactChannels = [
     description: profile.email || "Projetos, propostas e oportunidades",
     href: profile.email ? `mailto:${profile.email}` : "",
     external: false,
-  },
-  {
-    id: "instagram",
-    label: "Instagram",
-    description: "@peedro.cruzz",
-    href: profile.instagram,
-    external: true,
   },
 ];
 export type ProjectImage = { src: string; alt: string; caption: string };
