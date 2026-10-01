@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" role="img" aria-labelledby="t d">
+  <title id="t">Fluxo de componentes do HigiFlow</title>
+  <desc id="d">O navegador usa templates Django. URLs verificam perfis e chamam views e formulários. Estes consultam modelos e o banco; views podem consultar ViaCEP e Nominatim.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#72dfc3"/></marker></defs>
+  <rect width="900" height="400" rx="18" fill="#101d2a"/>
+  <g fill="#17313b" stroke="#3d8b84" stroke-width="2"><rect x="25" y="135" width="150" height="100" rx="12"/><rect x="230" y="135" width="150" height="100" rx="12"/><rect x="435" y="135" width="150" height="100" rx="12"/><rect x="640" y="35" width="215" height="100" rx="12"/><rect x="640" y="235" width="215" height="100" rx="12"/></g>
+  <g stroke="#72dfc3" stroke-width="3" marker-end="url(#a)" fill="none"><path d="M175 185H225"/><path d="M380 185H430"/><path d="M585 185H615V85H635"/><path d="M585 185H615V285H635"/></g>
+  <g fill="#eefdf8" font-family="Arial,sans-serif" text-anchor="middle"><text x="100" y="173" font-size="18">Navegador</text><text x="100" y="198" font-size="13">templates</text><text x="305" y="173" font-size="17">URLs Django</text><text x="305" y="198" font-size="13">login e perfil</text><text x="510" y="173" font-size="17">Views</text><text x="510" y="198" font-size="13">formulários</text><text x="747" y="73" font-size="17">Modelos</text><text x="747" y="98" font-size="13">banco configurável</text><text x="747" y="273" font-size="17">Integrações</text><text x="747" y="298" font-size="13">ViaCEP · Nominatim</text></g>
+</svg>

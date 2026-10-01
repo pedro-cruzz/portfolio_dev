@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="400" viewBox="0 0 900 400" role="img" aria-labelledby="t d">
+  <title id="t">Componentes do IJA System</title>
+  <desc id="d">O navegador acessa templates e rotas Flask. As rotas chamam serviços e regras de acesso. Serviços consultam modelos SQLAlchemy, que persistem no banco relacional.</desc>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#71a6ff"/></marker></defs>
+  <rect width="900" height="400" rx="18" fill="#101a2c"/>
+  <g fill="#172842" stroke="#4c6d9d" stroke-width="2">
+    <rect x="35" y="135" width="155" height="100" rx="12"/><rect x="270" y="45" width="180" height="100" rx="12"/><rect x="270" y="225" width="180" height="100" rx="12"/><rect x="530" y="45" width="180" height="100" rx="12"/><rect x="530" y="225" width="180" height="100" rx="12"/><rect x="780" y="135" width="90" height="100" rx="12"/>
+  </g>
+  <g stroke="#71a6ff" stroke-width="3" marker-end="url(#a)" fill="none"><path d="M190 185H230V95H265"/><path d="M450 95H525"/><path d="M450 95H490V275H525"/><path d="M710 275H740V185H775"/><path d="M710 95H740V185H775"/><path d="M450 275H525"/></g>
+  <g fill="#eff6ff" font-family="Arial,sans-serif" text-anchor="middle"><text x="112" y="175" font-size="18">Navegador</text><text x="112" y="200" font-size="13">formulários</text><text x="360" y="83" font-size="17">Rotas Flask</text><text x="360" y="108" font-size="13">Jinja2 · login</text><text x="360" y="263" font-size="17">Regras de acesso</text><text x="360" y="288" font-size="13">perfil · prefeitura</text><text x="620" y="83" font-size="17">Serviços</text><text x="620" y="108" font-size="13">validação e fluxo</text><text x="620" y="263" font-size="17">Modelos</text><text x="620" y="288" font-size="13">SQLAlchemy</text><text x="825" y="178" font-size="15">Banco</text><text x="825" y="202" font-size="12">relacional</text></g>
+</svg>

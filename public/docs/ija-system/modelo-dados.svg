@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="660" viewBox="0 0 1040 660" role="img" aria-labelledby="title description">
+  <title id="title">Modelo de entidades e relacionamentos do IJA System</title>
+  <desc id="description">Recorte de três cadeias de dados: Prefeitura, Usuário, Solicitação e Ordem de Serviço; Cliente Agro, Orçamento Agro, Contrato Agro e Ordem de Serviço Agro; Equipe, Veículo, Log de Veículo e Abastecimento. As linhas indicam as cardinalidades registradas na documentação de arquitetura do sistema.</desc>
+  <rect width="1040" height="660" rx="18" fill="#101a2c"/>
+  <g font-family="Arial,sans-serif" fill="#eff6ff">
+    <text x="42" y="47" font-size="25" font-weight="700">Relações centrais de dados</text>
+    <text x="42" y="75" font-size="15" fill="#b8c9e2">Recorte do modelo: operação urbana, agro e frota</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="15" font-weight="700">
+    <text x="42" y="122" fill="#93bcff">OPERAÇÃO URBANA</text>
+    <text x="42" y="299" fill="#93bcff">AGRO</text>
+    <text x="42" y="476" fill="#93bcff">FROTA</text>
+  </g>
+  <g fill="#172842" stroke="#4c6d9d" stroke-width="2">
+    <rect x="42" y="143" width="205" height="75" rx="10"/><rect x="292" y="143" width="205" height="75" rx="10"/><rect x="542" y="143" width="205" height="75" rx="10"/><rect x="792" y="143" width="205" height="75" rx="10"/>
+    <rect x="42" y="320" width="205" height="75" rx="10"/><rect x="292" y="320" width="205" height="75" rx="10"/><rect x="542" y="320" width="205" height="75" rx="10"/><rect x="792" y="320" width="205" height="75" rx="10"/>
+    <rect x="42" y="497" width="205" height="75" rx="10"/><rect x="292" y="497" width="205" height="75" rx="10"/><rect x="542" y="497" width="205" height="75" rx="10"/><rect x="792" y="497" width="205" height="75" rx="10"/>
+  </g>
+  <g stroke="#71a6ff" stroke-width="2.5" fill="none">
+    <path d="M247 180H292M497 180H542M747 180H792"/>
+    <path d="M247 357H292M497 357H542M747 357H792"/>
+    <path d="M247 534H292M497 534H542M747 534H792"/>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="16" fill="#eff6ff" text-anchor="middle">
+    <text x="144" y="187">Prefeitura</text><text x="394" y="187">Usuário</text><text x="644" y="187">Solicitação</text><text x="894" y="177">Ordem de Serviço</text><text x="894" y="197" font-size="13">urbana</text>
+    <text x="144" y="364">Cliente Agro</text><text x="394" y="364">Orçamento Agro</text><text x="644" y="364">Contrato Agro</text><text x="894" y="354">Ordem de Serviço</text><text x="894" y="374" font-size="13">agro</text>
+    <text x="144" y="541">Equipe</text><text x="394" y="541">Veículo</text><text x="644" y="541">Log de Veículo</text><text x="894" y="541">Abastecimento</text>
+  </g>
+  <g font-family="Arial,sans-serif" font-size="12" font-weight="700" fill="#b8d5ff" text-anchor="middle">
+    <text x="256" y="171">1</text><text x="283" y="171">0..N</text><text x="506" y="171">1</text><text x="533" y="171">0..N</text><text x="756" y="171">1</text><text x="783" y="171">0..1</text>
+    <text x="256" y="348">0..1</text><text x="283" y="348">0..N</text><text x="506" y="348">1</text><text x="533" y="348">0..1</text><text x="756" y="348">1</text><text x="783" y="348">0..N</text>
+    <text x="256" y="525">0..1</text><text x="283" y="525">0..N</text><text x="506" y="525">1</text><text x="533" y="525">0..N</text><text x="756" y="525">1</text><text x="783" y="525">0..N</text>
+  </g>
+  <text x="42" y="625" font-family="Arial,sans-serif" font-size="14" fill="#b8c9e2">Cardinalidades baseadas em docs/arquitetura.md; campos e constraints: app/models.py.</text>
+</svg>
