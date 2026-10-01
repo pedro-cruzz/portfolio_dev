@@ -122,8 +122,9 @@ test("the IJA home card shows coauthorship and INPI registration without opening
   await page.goto("/#projetos");
   const card = page.locator('.selected-project[data-project="ija-system"]');
   const credentials = card.getByLabel("Autoria e registro do projeto");
+  await expect(credentials).toContainText("COAUTORES");
+  await expect(credentials).toContainText("Pedro Henrique Cruz Vilas Bôas");
   await expect(credentials).toContainText("João Pedro");
-  await expect(credentials).not.toContainText("Pedro Henrique");
   await expect(
     credentials.getByRole("link", {
       name: "Abrir portfólio de João Pedro Gomes da Silva",

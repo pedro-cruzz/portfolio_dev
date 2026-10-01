@@ -161,19 +161,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               aria-label="Autoria e registro do projeto"
             >
               <p>
-                <span>COAUTOR · DESENVOLVEDOR</span>
+                <span>COAUTORES</span>
+                <strong>{profile.name}</strong>
                 {project.experience.collaborator ? (
-                  <strong className="project-partner-credit">
-                    <a
-                      href={project.experience.collaborator.portfolio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Abrir portfólio de ${project.experience.collaborator.name}`}
-                    >
-                      {project.experience.collaborator.name}
-                      <ArrowUpRight size={13} />
-                    </a>
-                  </strong>
+                  <>
+                    e
+                    <strong className="project-partner-credit">
+                      <a
+                        href={project.experience.collaborator.portfolio}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Abrir portfólio de ${project.experience.collaborator.name}`}
+                      >
+                        {project.experience.collaborator.name}
+                        <ArrowUpRight size={13} />
+                      </a>
+                    </strong>
+                  </>
                 ) : (
                   project.experience.collaboration
                 )}
