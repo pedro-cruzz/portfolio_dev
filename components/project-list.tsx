@@ -64,7 +64,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       <div className="project-visual">
         <Link
           href={`/projetos/${project.slug}`}
-          className={`project-cover ${hasScreens ? "" : "is-blueprint"}`}
+          className={`project-cover ${hasScreens ? "" : "is-blueprint"} ${project.slug === "ija-system" ? "is-ija" : ""}`}
+          style={
+            project.slug === "ija-system" && photo
+              ? { backgroundImage: `url("${withBasePath(photo.src)}")` }
+              : undefined
+          }
           aria-label={`Conhecer ${project.name}`}
         >
           {hasScreens ? (
@@ -73,8 +78,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 key={photo.src}
                 src={withBasePath(photo.src)}
                 alt={photo.alt}
-                width={1440}
-                height={960}
+                width={photo.width ?? 1440}
+                height={photo.height ?? 960}
                 loading="lazy"
               />
               <span className="cover-invitation">

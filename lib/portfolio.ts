@@ -38,7 +38,13 @@ export const contactChannels = [
     external: false,
   },
 ];
-export type ProjectImage = { src: string; alt: string; caption: string };
+export type ProjectImage = {
+  src: string;
+  alt: string;
+  caption: string;
+  width?: number;
+  height?: number;
+};
 // Fill only after Pedro confirms the information. Missing fields are not rendered.
 export type ProjectExperience = {
   confirmed: boolean;
@@ -100,54 +106,72 @@ export const projects: Project[] = [
     images: [
       {
         src: "/projects/ija-system/login-limpo.png",
+        width: 1716,
+        height: 916,
         alt: "Tela de entrada do IJA System com apresentação da plataforma operacional e opções de acesso",
         caption:
           "Entrada do IJA System: solicitações, agenda, rotas e relatórios apresentados antes do acesso à operação.",
       },
       {
         src: "/projects/ija-system/agenda-redigida.png",
+        width: 1706,
+        height: 922,
         alt: "Agenda do IJA System com compromissos ocultados e ação Rota do Dia visível",
         caption:
           "Agenda operacional: solicitações organizadas por data e acesso à rota do dia. Endereços ocultados na captura.",
       },
       {
         src: "/projects/ija-system/agenda-street-view-redigida.png",
+        width: 1712,
+        height: 919,
         alt: "Detalhes de um agendamento no IJA System com Street View e ações Maps e Traçar Rota; endereço e coordenadas ocultados",
         caption:
           "Detalhe da agenda: integração com Google Maps, visualização no Street View e acesso à rota. Endereço, coordenadas e identificadores ocultados.",
       },
       {
         src: "/projects/ija-system/overview.webp",
+        width: 1440,
+        height: 960,
         alt: "Painel Agro do IJA System com indicadores demonstrativos",
         caption:
           "Painel Agro: acesso aos fluxos comercial, operacional e financeiro. Dados demonstrativos.",
       },
       {
         src: "/projects/ija-system/detail.webp",
+        width: 1920,
+        height: 1014,
         alt: "Central de Veículos do IJA System com seis áreas de gestão da frota",
         caption:
           "Central de Veículos atualizada: frota, rastreamento, logs, limpeza, checklist e alertas.",
       },
       {
         src: "/projects/ija-system/central-relatorios.webp",
+        width: 1920,
+        height: 1019,
         alt: "Central de Relatórios do IJA System com opções de solicitações, ordens de serviço, mídias e voos",
         caption:
           "Central de Relatórios: solicitações, OS, mídias, retornos automáticos e logs de voo.",
       },
       {
         src: "/projects/ija-system/rastreamento-demo.webp",
+        width: 1920,
+        height: 1012,
         alt: "Rastreamento demonstrativo do IJA System com veículos e rotas fictícios no mapa",
         caption:
           "Rastreamento da frota em modo demonstrativo, com veículos e trajetos fictícios.",
       },
       {
         src: "/projects/ija-system/boletim-saude.webp",
+        width: 1920,
+        height: 1031,
         alt: "Boletim de saúde público do Portal do Cidadão com indicadores de dengue",
         caption:
           "Portal do Cidadão: boletim de saúde com indicadores públicos do InfoDengue.",
       },
       {
         src: "/projects/ija-system/relatorio-arboviroses.webp",
+        width: 1920,
+        height: 1035,
         alt: "Relatório público de arboviroses com evolução semanal dos casos estimados",
         caption:
           "Relatório epidemiológico público: evolução semanal e origem dos dados.",

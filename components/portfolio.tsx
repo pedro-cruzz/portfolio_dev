@@ -18,6 +18,7 @@ import {
 import { contactChannels, profile } from "@/lib/portfolio";
 import ProjectList from "./project-list";
 import ResumeContact from "./resume-contact";
+import CareerJourney from "./career-journey";
 import AmbientControl from "./ambient-control";
 import BrandMark from "./brand-mark";
 import GitHubIcon from "./github-icon";
@@ -232,8 +233,8 @@ export default function Portfolio() {
               formado em Análise e Desenvolvimento de Sistemas pelo Centro
               Universitário de Itajubá (FEPI, 2024–2026). Desde 2026, curso
               Sistemas de Informação na mesma instituição. Durante meu estágio
-              na IJA Drones, trabalhei no desenvolvimento e na manutenção de
-              um sistema usado para organizar solicitações, equipes, ordens de
+              na IJA Drones, trabalhei no desenvolvimento e na manutenção de um
+              sistema usado para organizar solicitações, equipes, ordens de
               serviço, frota e relatórios de operações com drones.
             </p>
             <p className="muted">
@@ -243,6 +244,10 @@ export default function Portfolio() {
               Gosto de entender o fluxo de trabalho antes de decidir como
               organizar as regras, os dados e as telas.
             </p>
+            <a className="about-journey-link" href="#trajetoria">
+              Conheça minha trajetória{" "}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
           </div>
         </section>
         <section className="projects section wrap" id="projetos">
@@ -269,6 +274,7 @@ export default function Portfolio() {
           </div>
           <ProjectList />
         </section>
+        <CareerJourney />
         <ResumeContact />
       </main>
       {workbench.audioPlaying && (

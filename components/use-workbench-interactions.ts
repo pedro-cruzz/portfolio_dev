@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   createAmbientAudio,
+  defaultHeadsetTrack,
   headsetLoopSeconds,
   headsetTracks,
   type HeadsetTrack,
@@ -17,10 +18,10 @@ export default function useWorkbenchInteractions(reducedMotion: boolean) {
   const [coffeePulse, setCoffeePulse] = useState(0);
   const [audioPlaying, setAudioPlaying] = useState(false);
   const [audioPaused, setAudioPaused] = useState(false);
-  const [track, setTrackState] = useState<HeadsetTrack>("rain");
+  const [track, setTrackState] = useState<HeadsetTrack>(defaultHeadsetTrack);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(headsetLoopSeconds);
-  const [volume, setVolumeState] = useState(35);
+  const [volume, setVolumeState] = useState(25);
   const [message, setMessage] = useState(defaultMessage);
   const engine = useRef<ReturnType<typeof createAmbientAudio> | null>(null);
   const media = useRef<HTMLAudioElement | null>(null);
@@ -28,8 +29,8 @@ export default function useWorkbenchInteractions(reducedMotion: boolean) {
   const wantedAudio = useRef(false);
   const paused = useRef(false);
   const mounted = useRef(true);
-  const volumeRef = useRef(35);
-  const trackRef = useRef<HeadsetTrack>("rain");
+  const volumeRef = useRef(25);
+  const trackRef = useRef<HeadsetTrack>(defaultHeadsetTrack);
   const navigationTimer = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined,
   );

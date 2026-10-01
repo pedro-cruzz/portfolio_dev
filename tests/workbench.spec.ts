@@ -6,6 +6,11 @@ test("the workbench responds to keyboard input and audio only starts on request"
   page,
 }) => {
   const errors: string[] = [];
+  const mediaRequests: string[] = [];
+  page.on("request", (request) => {
+    if (/\.(mp3|ogg)(?:\?|$)/.test(request.url()))
+      mediaRequests.push(request.url());
+  });
   page.on("pageerror", (error) => errors.push(error.message));
   await page.addInitScript(() => {
     const contexts: AudioContext[] = [];
@@ -27,6 +32,7 @@ test("the workbench responds to keyboard input and audio only starts on request"
     ),
   ).toBe(0);
   await expect(page.getByLabel("Controle do áudio do headset")).toHaveCount(0);
+  expect(mediaRequests).toEqual([]);
   await coffee.focus();
   await page.keyboard.press("Enter");
   await expect(page.locator(".scene-instruction")).toContainText(
@@ -47,6 +53,70 @@ test("the workbench responds to keyboard input and audio only starts on request"
       exact: true,
     }),
   ).toHaveAttribute("aria-pressed", "true");
+  await expect(player.locator(".player-now strong")).toHaveText("Lofi Study");
+  await expect(player.getByRole("link", { name: "Pixabay" })).toHaveAttribute(
+    "href",
+    "https://pixabay.com/service/license-summary/",
+  );
+  await expect(
+    player.getByRole("slider", { name: "Volume do headset" }),
+  ).toHaveValue("25");
+  await expect
+    .poll(async () =>
+      Number(
+        await player
+          .getByRole("slider", { name: "Progresso da faixa" })
+          .inputValue(),
+      ),
+    )
+    .toBeGreaterThan(0);
+  expect(
+    mediaRequests.some((url) => url.endsWith("/audio/lofi-study.mp3")),
+  ).toBe(true);
+  for (const [name, file, source] of [
+    [
+      "Lofi Chill 2",
+      "lofi-chill-2.mp3",
+      "https://pixabay.com/music/lofi-lofi-chill-2-462279/",
+    ],
+    [
+      "Good Night",
+      "good-night.mp3",
+      "https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/",
+    ],
+  ]) {
+    await player.getByRole("button", { name: "Próxima faixa" }).click();
+    await expect(player.locator(".player-now strong")).toHaveText(name);
+    await expect(player.getByRole("link", { name: "origem" })).toHaveAttribute(
+      "href",
+      source,
+    );
+    await expect
+      .poll(async () =>
+        Number(
+          await player
+            .getByRole("slider", { name: "Progresso da faixa" })
+            .getAttribute("max"),
+        ),
+      )
+      .toBeGreaterThan(140);
+    await expect
+      .poll(async () =>
+        Number(
+          await player
+            .getByRole("slider", { name: "Progresso da faixa" })
+            .inputValue(),
+        ),
+      )
+      .toBeGreaterThan(0);
+    expect(mediaRequests.some((url) => url.endsWith(`/audio/${file}`))).toBe(
+      true,
+    );
+  }
+  await player.getByRole("button", { name: "Faixa anterior" }).click();
+  await expect(player.locator(".player-now strong")).toHaveText("Lofi Chill 2");
+  await player.getByRole("button", { name: "Ver lista de faixas" }).click();
+  await player.getByRole("button", { name: "Selecionar Chuva suave" }).click();
   await expect
     .poll(() =>
       page.evaluate(
@@ -55,7 +125,6 @@ test("the workbench responds to keyboard input and audio only starts on request"
       ),
     )
     .toBe("running");
-  await player.getByRole("button", { name: "Ver lista de faixas" }).click();
   for (const name of ["Mar calmo", "Foco leve", "Noite calma", "Chuva suave"]) {
     await player.getByRole("button", { name: `Selecionar ${name}` }).click();
     await expect(player.locator(".player-now strong")).toHaveText(name);
@@ -177,6 +246,7 @@ test("touch actions and project navigation work with reduced motion", async ({
       .tap();
     const player = page.getByLabel("Controle do áudio do headset");
     await expect(player).toBeVisible();
+    await expect(player.locator(".player-now strong")).toHaveText("Lofi Study");
     await player.getByRole("button", { name: "Ver lista de faixas" }).tap();
     await player.getByRole("button", { name: "Selecionar Foco leve" }).tap();
     await expect(player.locator(".player-now strong")).toHaveText("Foco leve");
@@ -198,6 +268,49 @@ test("touch actions and project navigation work with reduced motion", async ({
           document.documentElement.clientWidth,
       ),
     ).toBeLessThanOrEqual(1);
+  } finally {
+    await context.close();
+  }
+});
+
+test("Pixabay playlist fits a 320px screen", async ({ browser }, testInfo) => {
+  const context = await browser.newContext({
+    viewport: { width: 320, height: 800 },
+    isMobile: true,
+    hasTouch: true,
+    reducedMotion: "reduce",
+  });
+  try {
+    const page = await context.newPage();
+    await page.goto("/");
+    await page
+      .getByRole("button", { name: "Ativar som pelo headset", exact: true })
+      .tap();
+    const player = page.getByLabel("Controle do áudio do headset");
+    await player.getByRole("button", { name: "Ver lista de faixas" }).tap();
+    for (const name of ["Lofi Study", "Lofi Chill 2", "Good Night"]) {
+      await expect(
+        player.getByRole("button", { name: `Selecionar ${name}`, exact: true }),
+      ).toBeVisible();
+    }
+    const bounds = await player.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(320);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth -
+          document.documentElement.clientWidth,
+      ),
+    ).toBeLessThanOrEqual(1);
+    await page.screenshot({
+      path: testInfo.outputPath("pixabay-player-320.png"),
+    });
+    await player
+      .getByRole("button", { name: "Desligar áudio do headset", exact: true })
+      .tap();
+    await expect(player).toHaveCount(0);
   } finally {
     await context.close();
   }

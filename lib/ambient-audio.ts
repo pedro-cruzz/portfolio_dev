@@ -1,32 +1,36 @@
 // Audio starts only after a headset action. File credits live beside the player.
 export const headsetTracks = [
   {
-    id: "rain",
-    name: "Chuva suave",
-    kind: "Ambiente",
-    artist: "Síntese local",
-    media: "synth",
+    id: "lofi-study",
+    name: "Lofi Study",
+    kind: "Lo-fi",
+    artist: "FASSounds",
+    media: "file",
+    src: "/audio/lofi-study.mp3",
+    source:
+      "https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/",
+    license: "Pixabay",
   },
   {
-    id: "ocean",
-    name: "Mar calmo",
-    kind: "Ambiente",
-    artist: "Síntese local",
-    media: "synth",
+    id: "lofi-chill-2",
+    name: "Lofi Chill 2",
+    kind: "Lo-fi",
+    artist: "DELOSound",
+    media: "file",
+    src: "/audio/lofi-chill-2.mp3",
+    source: "https://pixabay.com/music/lofi-lofi-chill-2-462279/",
+    license: "Pixabay",
   },
   {
-    id: "focus",
-    name: "Foco leve",
-    kind: "Instrumental",
-    artist: "Síntese local",
-    media: "synth",
-  },
-  {
-    id: "night",
-    name: "Noite calma",
-    kind: "Instrumental",
-    artist: "Síntese local",
-    media: "synth",
+    id: "good-night",
+    name: "Good Night",
+    kind: "Lo-fi",
+    artist: "FASSounds",
+    media: "file",
+    src: "/audio/good-night.mp3",
+    source:
+      "https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/",
+    license: "Pixabay",
   },
   {
     id: "cat-caffe",
@@ -99,6 +103,34 @@ export const headsetTracks = [
     license: "CC0",
   },
   {
+    id: "rain",
+    name: "Chuva suave",
+    kind: "Ambiente",
+    artist: "Síntese local",
+    media: "synth",
+  },
+  {
+    id: "ocean",
+    name: "Mar calmo",
+    kind: "Ambiente",
+    artist: "Síntese local",
+    media: "synth",
+  },
+  {
+    id: "focus",
+    name: "Foco leve",
+    kind: "Instrumental",
+    artist: "Síntese local",
+    media: "synth",
+  },
+  {
+    id: "night",
+    name: "Noite calma",
+    kind: "Instrumental",
+    artist: "Síntese local",
+    media: "synth",
+  },
+  {
     id: "waterfall",
     name: "Cachoeira",
     kind: "Natureza",
@@ -121,6 +153,12 @@ export const headsetTracks = [
 ] as const;
 
 export type HeadsetTrack = (typeof headsetTracks)[number]["id"];
+export const defaultHeadsetTrack = "lofi-study" satisfies HeadsetTrack;
+export const headsetLicenseUrls = {
+  CC0: "https://creativecommons.org/publicdomain/zero/1.0/",
+  "CC BY 3.0": "https://creativecommons.org/licenses/by/3.0/",
+  Pixabay: "https://pixabay.com/service/license-summary/",
+} as const;
 export type SynthTrack = Extract<
   (typeof headsetTracks)[number],
   { media: "synth" }

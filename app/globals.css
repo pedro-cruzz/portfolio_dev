@@ -1889,6 +1889,32 @@ a.contact-channel:hover .contact-channel-arrow {
   object-fit: contain;
   display: block;
 }
+.project-gallery.is-ija .gallery-open,
+.project-cover.is-ija {
+  aspect-ratio: 1.87;
+  isolation: isolate;
+}
+.project-gallery.is-ija .gallery-open::before,
+.project-cover.is-ija::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  z-index: 0;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: blur(16px);
+  opacity: 1;
+}
+.project-gallery.is-ija .gallery-open > img,
+.project-cover.is-ija > img {
+  position: relative;
+  z-index: 1;
+}
+.project-gallery.is-ija .gallery-open > img {
+  aspect-ratio: 1.87;
+  max-height: none;
+}
 .gallery-expand {
   position: absolute;
   bottom: 14px;
@@ -4532,3 +4558,14 @@ a.contact-channel:hover .contact-channel-arrow {
     transition: none;
   }
 }
+
+.about-journey-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--accent);
+  font-size: 14px;
+  text-underline-offset: 5px;
+}
+.about-journey-link:hover { text-decoration: underline; }

@@ -1,0 +1,23 @@
+Pixabay tracks used as optional background music in this portfolio.
+Retrieved from the official Pixabay CDN on 2026-10-01; files unmodified.
+License: Pixabay Content License (not CC0)
+https://pixabay.com/service/license-summary/
+https://pixabay.com/service/terms/
+
+lofi-study.mp3
+Lofi Study - Calm Peaceful Chill Hop — FASSounds
+https://pixabay.com/music/beats-lofi-study-calm-peaceful-chill-hop-112191/
+https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3
+
+lofi-chill-2.mp3
+Lofi Chill 2 — DELOSound
+https://pixabay.com/music/lofi-lofi-chill-2-462279/
+https://cdn.pixabay.com/audio/2026/01/07/audio_8229253608.mp3
+
+good-night.mp3
+Good Night - Lofi Cozy Chill Music — FASSounds
+https://pixabay.com/music/beats-good-night-lofi-cozy-chill-music-160166/
+https://cdn.pixabay.com/audio/2023/07/30/audio_e0908e8569.mp3
+
+All three source pages identify the tracks as Content ID registered.
+This provenance record is not a Pixabay download certificate.

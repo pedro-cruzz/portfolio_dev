@@ -43,18 +43,23 @@ export default function ProjectGallery({
     setIndex((i) => (i + step + project.images.length) % project.images.length);
   }
   return (
-    <div className={`project-gallery ${compact ? "compact" : ""}`}>
+    <div className={`project-gallery ${compact ? "compact" : ""} ${project.slug === "ija-system" ? "is-ija" : ""}`}>
       <figure className="gallery-figure">
         <button
           className="gallery-open"
+          style={
+            project.slug === "ija-system"
+              ? { backgroundImage: `url("${withBasePath(image.src)}")` }
+              : undefined
+          }
           onClick={() => setOpen(true)}
           aria-label={`Ampliar imagem de ${project.name}`}
         >
           <img
             src={withBasePath(image.src)}
             alt={image.alt}
-            width={1440}
-            height={960}
+            width={image.width ?? 1440}
+            height={image.height ?? 960}
           />
           <span className="gallery-expand">
             <Maximize2 size={15} />
@@ -77,7 +82,12 @@ export default function ProjectGallery({
               aria-pressed={index === i}
               aria-label={`Ver imagem ${i + 1} de ${project.name}`}
             >
-              <img src={withBasePath(img.src)} alt="" width={96} height={64} />
+              <img
+                src={withBasePath(img.src)}
+                alt=""
+                width={img.width ?? 96}
+                height={img.height ?? 64}
+              />
               <span>0{i + 1}</span>
             </button>
           ))}
@@ -145,8 +155,8 @@ export default function ProjectGallery({
         <img
           src={withBasePath(image.src)}
           alt={image.alt}
-          width={1440}
-          height={960}
+          width={image.width ?? 1440}
+          height={image.height ?? 960}
         />
         <div className="image-dialog-footer">
           <button

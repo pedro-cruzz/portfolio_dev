@@ -12,7 +12,11 @@ import {
   VolumeX,
   X,
 } from "lucide-react";
-import { headsetTracks, type HeadsetTrack } from "@/lib/ambient-audio";
+import {
+  headsetTracks,
+  headsetLicenseUrls,
+  type HeadsetTrack,
+} from "@/lib/ambient-audio";
 
 function formatTime(seconds: number) {
   if (!Number.isFinite(seconds) || seconds <= 0) return "0:00";
@@ -85,11 +89,7 @@ export default function AmbientControl({
           </a>{" "}
           ·{" "}
           <a
-            href={
-              selected.license === "CC0"
-                ? "https://creativecommons.org/publicdomain/zero/1.0/"
-                : "https://creativecommons.org/licenses/by/3.0/"
-            }
+            href={headsetLicenseUrls[selected.license]}
             target="_blank"
             rel="noreferrer"
           >
