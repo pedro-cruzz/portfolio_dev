@@ -68,6 +68,11 @@ export default function ResumeContact() {
                   className="button secondary"
                   href={withBasePath(profile.resume.url)}
                   download={profile.resume.filename}
+                  onClick={(event) => {
+                    if (!window.confirm("Deseja baixar o currículo em PDF?")) {
+                      event.preventDefault();
+                    }
+                  }}
                 >
                   <Download size={17} /> Baixar PDF
                 </a>

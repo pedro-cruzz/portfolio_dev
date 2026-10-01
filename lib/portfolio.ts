@@ -9,8 +9,7 @@ export const profile = {
   whatsapp: "5535998603656",
   email: "phcruzvilasboas@gmail.com",
   resume: {
-    // Add the PDF under public/ and set its local URL when it is ready.
-    url: "",
+    url: "/pedro-henrique-curriculo.pdf",
     filename: "pedro-henrique-curriculo.pdf",
   },
 };

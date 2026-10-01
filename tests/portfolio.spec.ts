@@ -250,6 +250,43 @@ test("resume and contact sections expose only configured destinations", async ({
   }
 });
 
+test("resume PDF is available and download needs confirmation", async ({
+  page,
+}) => {
+  const response = await page.request.get(profile.resume.url);
+  expect(response.ok()).toBe(true);
+  expect((await response.body()).subarray(0, 5).toString()).toBe("%PDF-");
+
+  await page.goto("/#curriculo");
+  const resume = page.getByRole("region", { name: "Além dos projetos." });
+  const downloadLink = resume.getByRole("link", { name: "Baixar PDF" });
+  await expect(
+    resume.getByRole("link", { name: "Abrir currículo em nova aba" }),
+  ).toHaveAttribute("href", profile.resume.url);
+  const [pdfTab] = await Promise.all([
+    page.waitForEvent("popup"),
+    resume.getByRole("link", { name: "Abrir currículo em nova aba" }).click(),
+  ]);
+  await expect(pdfTab).toHaveURL(new RegExp(`${profile.resume.url}$`));
+  await pdfTab.close();
+
+  let downloads = 0;
+  page.on("download", () => downloads++);
+  page.once("dialog", async (dialog) => {
+    expect(dialog.message()).toBe("Deseja baixar o currículo em PDF?");
+    await dialog.dismiss();
+  });
+  await downloadLink.click();
+  expect(downloads).toBe(0);
+
+  page.once("dialog", async (dialog) => await dialog.accept());
+  const [download] = await Promise.all([
+    page.waitForEvent("download"),
+    downloadLink.click(),
+  ]);
+  expect(download.suggestedFilename()).toBe(profile.resume.filename);
+});
+
 test("project navigation shows one case, wraps both ways and supports the keyboard", async ({
   page,
 }) => {
